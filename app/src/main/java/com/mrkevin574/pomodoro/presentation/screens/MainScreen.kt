@@ -15,6 +15,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -23,6 +24,7 @@ import com.google.accompanist.pager.rememberPagerState
 import com.mrkevin574.pomodoro.presentation.screens.log.LogScreen
 import com.mrkevin574.pomodoro.presentation.screens.timer.TimerScreen
 import kotlinx.coroutines.launch
+import com.mrkevin574.pomodoro.R
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -41,7 +43,7 @@ fun MainScreen() {
                 Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
             )
         },
-        modifier = Modifier.height(60.dp)
+        modifier = Modifier.height(dimensionResource(id = R.dimen.tab_row_size))
     ) {
         pages.forEachIndexed {index, icon ->
             Tab(
@@ -65,7 +67,7 @@ fun MainScreen() {
         state = pagerState,
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 60.dp)
+            .padding(top = dimensionResource(id = R.dimen.tab_row_size))
     ){ page ->
         when(page)
         {
