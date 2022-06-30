@@ -2,8 +2,8 @@ package com.mrkevin574.pomodoro.domain
 
 data class Pomodoro(
     val name : String,
-    val jobTime : Int,
-    val shortBreak : Int,
-    val longBreak : Int,
+    val jobTime : Float,
+    val shortBreak : Float,
+    val longBreak : Float,
     var actualCycle : Int = 0
 )
