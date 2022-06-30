@@ -1,6 +1,5 @@
 package com.mrkevin574.pomodoro.domain
 
-import java.time.LocalDateTime
 import java.util.*
 
 data class PomodoroFinalized(
