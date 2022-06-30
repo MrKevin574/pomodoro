@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="tab_row_size">60dp</dimen>
-    <dimen name="timer_progress_stroke">15dp</dimen>
+    <dimen name="timer_progress_stroke">25dp</dimen>
 </resources>

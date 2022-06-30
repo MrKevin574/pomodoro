@@ -21,27 +21,23 @@ fun PomodoroItem(pomodoro: Pomodoro) {
     ) {
         Text(
             text = pomodoro.name.replaceFirstChar { it.uppercase() },
-            fontSize = 24.sp,
+            fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = Color.White
         )
-        Text(
-            text = "Date created: ${pomodoro.date}",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Normal,
-            color = Color.White
-        )
-        Text(
-            text = "Cycles completed: ${pomodoro.cycles}",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Normal,
-            color = Color.White
-        )
-        Text(
-            text = "Total focused time: ${pomodoro.focusedTime}",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Normal,
-            color = Color.White
-        )
+        TextSecondaryTask("Date created: ${pomodoro.date}")
+        TextSecondaryTask("Cycles completed: ${pomodoro.cycles}")
+        TextSecondaryTask("Total focused time: ${pomodoro.focusedTime}")
     }
+}
+
+@Composable
+fun TextSecondaryTask(text : String)
+{
+    Text(
+        text = text,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Normal,
+        color = Color.White
+    )
 }

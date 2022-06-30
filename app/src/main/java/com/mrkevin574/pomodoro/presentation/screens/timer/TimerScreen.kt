@@ -20,9 +20,6 @@ fun TimerScreen() {
         ButtonsTimer(onClick = {}, isPlay = false)
     }
 
-
-
-
 }
 
 @Composable

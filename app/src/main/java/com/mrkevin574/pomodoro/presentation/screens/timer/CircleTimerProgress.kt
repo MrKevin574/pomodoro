@@ -18,6 +18,6 @@ fun CircleTimerProgress(progress : Float) {
             .height(400.dp)
             .width(400.dp),
         color = Color.White,
-        strokeWidth = dimensionResource(id = R.dimen.timer_progress_stroke)
+        strokeWidth = 55.dp
     )
 }

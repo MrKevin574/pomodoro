@@ -12,7 +12,7 @@ fun TextTimerProgress(time : String) {
     Text(
         text = time,
         fontWeight = FontWeight.Bold,
-        fontSize = 80.sp,
+        fontSize = 50.sp,
         textAlign = TextAlign.Center,
         color = Color.White
     )
