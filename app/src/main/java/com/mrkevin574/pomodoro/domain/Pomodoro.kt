@@ -4,7 +4,8 @@ import com.mrkevin574.pomodoro.util.Cycles
 
 data class Pomodoro(
     val name : String = "",
-    val jobTime : Float = 0f,
+    val actualTimeRunning : Long = 0,
+    val jobTime : Long = 0,
     val shortBreak : Float = 0f,
     val longBreak : Float = 0f,
     var actualCycle : Cycles = Cycles.FIRST,
