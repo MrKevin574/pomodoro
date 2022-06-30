@@ -60,10 +60,8 @@ class TimerViewModel @Inject constructor(
         timer!!.start()
     }
 
-    fun onEvent(event : Event)
-    {
-        when(event)
-        {
+    fun onEvent(event: Event) {
+        when (event) {
             Event.Next -> {
                 timer?.cancel()
                 nextCycle()
@@ -82,9 +80,10 @@ class TimerViewModel @Inject constructor(
             }
             Event.Stop -> {
                 timer?.cancel()
-                finalizePomorodo()
+                restartProgress()
+                //   finalizePomorodo()
             }
-            Event.Pause ->  {
+            Event.Pause -> {
                 timer?.cancel()
                 _pomodoroState.value = pomodoroState.value.copy(
                     isRunning = false
@@ -93,8 +92,7 @@ class TimerViewModel @Inject constructor(
         }
     }
 
-    private fun nextCycle()
-    {
+    private fun nextCycle() {
         when (pomodoroState.value.actualCycle) {
             Cycles.FIRST -> {
                 _pomodoroState.value = pomodoroState.value.copy(
@@ -136,11 +134,15 @@ class TimerViewModel @Inject constructor(
         _pomodoroTimerState.value = pomodoroTimerState.value.copy(
             progress = 1f
         )
+        _timerTextState.value = timerTextState.value.copy(
+            actualTime = "00:00"
+        )
     }
 
-     private fun finalizePomorodo()
-     {
+    private fun finalizePomorodo() {
         // repository.savePomorodo()
-     }
+    }
+
+
 
 }
