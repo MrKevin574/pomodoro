@@ -23,21 +23,21 @@ fun ButtonsTimer(onClick : (Event) -> Unit, isPlay : Boolean) {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.Bottom,
     ){
-        OptionImage(imageVector = Icons.Rounded.Stop)
+        OptionImage(imageVector = Icons.Rounded.Stop, stringResource(R.string.stop))
         if(!isPlay)
-            OptionImage(imageVector = Icons.Rounded.PlayArrow)
+            OptionImage(imageVector = Icons.Rounded.PlayArrow, stringResource(R.string.play))
         else
-            OptionImage(imageVector = Icons.Rounded.Replay)
-        OptionImage(imageVector = Icons.Rounded.SkipNext)
+            OptionImage(imageVector = Icons.Rounded.Replay, stringResource(R.string.resume))
+        OptionImage(imageVector = Icons.Rounded.SkipNext, stringResource(R.string.next))
     }
 }
 
 @Composable
-fun OptionImage(imageVector: ImageVector)
+fun OptionImage(imageVector: ImageVector, contentDescription : String)
 {
     Image(
         imageVector = imageVector,
-        contentDescription = stringResource(R.string.stop),
+        contentDescription = contentDescription,
         colorFilter = ColorFilter.tint(Color.White),
         modifier = Modifier
             .height(40.dp)
