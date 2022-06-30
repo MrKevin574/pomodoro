@@ -12,6 +12,8 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
+import com.mrkevin574.pomodoro.presentation.screens.log.LogScreen
+import com.mrkevin574.pomodoro.presentation.screens.timer.TimerScreen
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)

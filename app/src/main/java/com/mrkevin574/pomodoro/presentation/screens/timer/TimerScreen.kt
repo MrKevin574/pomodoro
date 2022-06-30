@@ -1,4 +1,4 @@
-package com.mrkevin574.pomodoro.presentation.screens
+package com.mrkevin574.pomodoro.presentation.screens.timer
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
