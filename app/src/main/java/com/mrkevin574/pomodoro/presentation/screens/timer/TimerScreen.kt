@@ -17,13 +17,14 @@ fun TimerScreen(
 
     val pomorodoTimer = viewModel.pomodoroTimerState.value
     val pomorodoState = viewModel.pomodoroState.value
+    val timerTextState = viewModel.timerTextState.value
 
     val pomodoro = Pomodoro(
         name = "Test",
-        jobTime = 10000,
-        shortBreak = 5000f,
-        longBreak = 10000f,
-        actualTimeRunning = 10000
+        jobTime = 60000,
+        shortBreak = 15000f,
+        longBreak = 30000f,
+        actualTimeRunning = 60000
     )
 
 
@@ -38,7 +39,7 @@ fun TimerScreen(
         ButtonAddTask {
 
         }
-        ContainerTimer(pomorodoTimer.progress)
+        ContainerTimer(pomorodoTimer.progress, timerTextState.actualTime)
         ButtonsTimer(onClick = {}, isPlay = false)
     }
 
@@ -49,7 +50,7 @@ fun TimerScreen(
 }
 
 @Composable
-fun ContainerTimer(progress : Float) {
+fun ContainerTimer(progress : Float, timerText : String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -58,6 +59,6 @@ fun ContainerTimer(progress : Float) {
     ) {
 
         CircleTimerProgress(progress = progress)
-        TextTimerProgress(time = "12:00")
+        TextTimerProgress(time = timerText)
     }
 }

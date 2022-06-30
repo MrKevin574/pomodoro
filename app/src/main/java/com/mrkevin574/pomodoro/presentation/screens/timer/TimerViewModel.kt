@@ -23,10 +23,14 @@ class TimerViewModel @Inject constructor(
     private val _pomodoroTimerState = mutableStateOf(CircleTimerProgressState())
     val pomodoroTimerState: State<CircleTimerProgressState> = _pomodoroTimerState
 
+    private val _timerTextState = mutableStateOf(TimerTextState())
+    val timerTextState: State<TimerTextState> = _timerTextState
+
     private var timer: CountDownTimer? = null
 
 
     fun createNewTask(pomodoro: Pomodoro) {
+        restartProgress()
         _pomodoroState.value = pomodoroState.value.copy(
             name = pomodoro.name,
             jobTime = pomodoro.jobTime,
@@ -42,6 +46,9 @@ class TimerViewModel @Inject constructor(
                 _pomodoroTimerState.value = pomodoroTimerState.value.copy(
                     progress = millisUntilFinished / pomodoroState.value.actualTimeRunning.toFloat()
                 )
+                _timerTextState.value = timerTextState.value.copy(
+                    actualTime = "${(millisUntilFinished / 1000 / 60).toInt()}:${(millisUntilFinished / 1000 % 60).toInt()}"
+                )
             }
 
             override fun onFinish() {
@@ -54,43 +61,42 @@ class TimerViewModel @Inject constructor(
                         _pomodoroTimerState.value = pomodoroTimerState.value.copy(
                             progress = 1f
                         )
+                        createNewTask(pomodoroState.value)
                     }
                     Cycles.SHORT_BREAK -> {
                         _pomodoroState.value = pomodoroState.value.copy(
                             actualCycle = Cycles.MEDIUM,
                             actualTimeRunning = pomodoroState.value.jobTime.toLong()
                         )
+                        createNewTask(pomodoroState.value)
                     }
                     Cycles.MEDIUM -> {
                         _pomodoroState.value = pomodoroState.value.copy(
                             actualCycle = Cycles.LONG_BREAK,
                             actualTimeRunning = pomodoroState.value.longBreak.toLong()
                         )
+                        createNewTask(pomodoroState.value)
                     }
                     Cycles.LONG_BREAK -> {
                         _pomodoroState.value = pomodoroState.value.copy(
                             actualCycle = Cycles.LAST
                         )
-
+                        createNewTask(pomodoroState.value)
                     }
                     Cycles.LAST -> {
                         return
                     }
                 }
-                restartProgressAndTime()
             }
         }
 
         timer!!.start()
     }
 
-    private fun restartProgressAndTime()
-    {
+    private fun restartProgress() {
         _pomodoroTimerState.value = pomodoroTimerState.value.copy(
             progress = 1f
         )
-        timer?.cancel()
-        timer?.start()
     }
 
     /* fun finalizePomorodo()
