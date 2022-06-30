@@ -7,5 +7,6 @@ data class Pomodoro(
     val jobTime : Float,
     val shortBreak : Float,
     val longBreak : Float,
-    var actualCycle : Cycles = Cycles.FIRST
+    var actualCycle : Cycles = Cycles.FIRST,
+    var isRunning : Boolean = false
 )
