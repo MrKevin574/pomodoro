@@ -5,38 +5,38 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.mrkevin574.pomodoro.domain.Pomodoro
+import com.mrkevin574.pomodoro.domain.PomodoroFinalized
 import java.util.*
 
 @Composable
 fun LogScreen() {
 
-    val pomodoros = listOf<Pomodoro>(
-        Pomodoro(
+    val pomodoros = listOf<PomodoroFinalized>(
+        PomodoroFinalized(
             name = "Programar",
             date = Date(),
             cycles = 3,
             focusedTime = 30f
         ),
-        Pomodoro(
+        PomodoroFinalized(
             name = "chingar",
             date = Date(),
             cycles = 3,
             focusedTime = 30f
         ),
-        Pomodoro(
+        PomodoroFinalized(
             name = "comer",
             date = Date(),
             cycles = 3,
             focusedTime = 30f
         ),
-        Pomodoro(
+        PomodoroFinalized(
             name = "Programar",
             date = Date(),
             cycles = 3,
             focusedTime = 30f
         ),
-        Pomodoro(
+        PomodoroFinalized(
             name = "Programar",
             date = Date(),
             cycles = 3,

@@ -1,11 +1,9 @@
 package com.mrkevin574.pomodoro.domain
 
-import java.time.LocalDateTime
-import java.util.*
-
 data class Pomodoro(
     val name : String,
-    val date : Date,
-    val cycles : Int,
-    val focusedTime : Float
-    )
+    val jobTime : Int,
+    val shortBreak : Int,
+    val longBreak : Int,
+    var actualCycle : Int = 0
+)
