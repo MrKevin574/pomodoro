@@ -40,7 +40,7 @@ fun TimerScreen(
 
         }
         ContainerTimer(pomorodoTimer.progress, timerTextState.actualTime)
-        ButtonsTimer(onClick = {}, isPlay = false)
+        ButtonsTimer(onClick = {viewModel.onEvent(it)}, isPlay = pomorodoState.isRunning)
     }
 
     LaunchedEffect(pomodoro){

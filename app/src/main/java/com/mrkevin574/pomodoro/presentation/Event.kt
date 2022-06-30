@@ -5,4 +5,5 @@ sealed class Event{
     object Stop : Event()
     object Resume : Event()
     object Play : Event()
+    object Pause : Event()
 }

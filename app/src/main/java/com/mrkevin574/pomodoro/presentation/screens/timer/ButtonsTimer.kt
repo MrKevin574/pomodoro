@@ -1,6 +1,7 @@
 package com.mrkevin574.pomodoro.presentation.screens.timer
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.*
@@ -23,17 +24,17 @@ fun ButtonsTimer(onClick : (Event) -> Unit, isPlay : Boolean) {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.Bottom,
     ){
-        OptionImage(imageVector = Icons.Rounded.Stop, stringResource(R.string.stop))
+        OptionImage(imageVector = Icons.Rounded.Stop, stringResource(R.string.stop)) { onClick(Event.Stop) }
         if(!isPlay)
-            OptionImage(imageVector = Icons.Rounded.PlayArrow, stringResource(R.string.play))
+            OptionImage(imageVector = Icons.Rounded.PlayArrow, stringResource(R.string.play)) { onClick(Event.Play) }
         else
-            OptionImage(imageVector = Icons.Rounded.Replay, stringResource(R.string.resume))
-        OptionImage(imageVector = Icons.Rounded.SkipNext, stringResource(R.string.next))
+            OptionImage(imageVector = Icons.Rounded.Replay, stringResource(R.string.resume)) { onClick(Event.Pause) }
+        OptionImage(imageVector = Icons.Rounded.SkipNext, stringResource(R.string.next)) { onClick(Event.Next) }
     }
 }
 
 @Composable
-fun OptionImage(imageVector: ImageVector, contentDescription : String)
+fun OptionImage(imageVector: ImageVector, contentDescription : String, onClick: () -> Unit)
 {
     Image(
         imageVector = imageVector,
@@ -42,5 +43,6 @@ fun OptionImage(imageVector: ImageVector, contentDescription : String)
         modifier = Modifier
             .height(40.dp)
             .width(40.dp)
+            .clickable { onClick() },
     )
 }

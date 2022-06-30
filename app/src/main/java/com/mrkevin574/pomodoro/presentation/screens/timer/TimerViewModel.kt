@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mrkevin574.pomodoro.domain.Pomodoro
 import com.mrkevin574.pomodoro.domain.PomodoroRepository
+import com.mrkevin574.pomodoro.presentation.Event
 import com.mrkevin574.pomodoro.util.Cycles
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -37,7 +38,7 @@ class TimerViewModel @Inject constructor(
             shortBreak = pomodoro.shortBreak,
             longBreak = pomodoro.longBreak,
             actualCycle = pomodoro.actualCycle,
-            isRunning = pomodoro.isRunning,
+            isRunning = true,
             actualTimeRunning = pomodoro.actualTimeRunning
         )
 
@@ -52,45 +53,83 @@ class TimerViewModel @Inject constructor(
             }
 
             override fun onFinish() {
-                when (pomodoroState.value.actualCycle) {
-                    Cycles.FIRST -> {
-                        _pomodoroState.value = pomodoroState.value.copy(
-                            actualCycle = Cycles.SHORT_BREAK,
-                            actualTimeRunning = pomodoroState.value.shortBreak.toLong()
-                        )
-                        _pomodoroTimerState.value = pomodoroTimerState.value.copy(
-                            progress = 1f
-                        )
-                        createNewTask(pomodoroState.value)
-                    }
-                    Cycles.SHORT_BREAK -> {
-                        _pomodoroState.value = pomodoroState.value.copy(
-                            actualCycle = Cycles.MEDIUM,
-                            actualTimeRunning = pomodoroState.value.jobTime.toLong()
-                        )
-                        createNewTask(pomodoroState.value)
-                    }
-                    Cycles.MEDIUM -> {
-                        _pomodoroState.value = pomodoroState.value.copy(
-                            actualCycle = Cycles.LONG_BREAK,
-                            actualTimeRunning = pomodoroState.value.longBreak.toLong()
-                        )
-                        createNewTask(pomodoroState.value)
-                    }
-                    Cycles.LONG_BREAK -> {
-                        _pomodoroState.value = pomodoroState.value.copy(
-                            actualCycle = Cycles.LAST
-                        )
-                        createNewTask(pomodoroState.value)
-                    }
-                    Cycles.LAST -> {
-                        return
-                    }
-                }
+                nextCycle()
             }
         }
 
         timer!!.start()
+    }
+
+    fun onEvent(event : Event)
+    {
+        when(event)
+        {
+            Event.Next -> {
+                timer?.cancel()
+                nextCycle()
+            }
+            Event.Play -> {
+                timer?.start()
+                _pomodoroState.value = pomodoroState.value.copy(
+                    isRunning = true
+                )
+            }
+            Event.Resume -> {
+                timer?.start()
+                _pomodoroState.value = pomodoroState.value.copy(
+                    isRunning = true
+                )
+            }
+            Event.Stop -> {
+                timer?.cancel()
+                finalizePomorodo()
+            }
+            Event.Pause ->  {
+                timer?.cancel()
+                _pomodoroState.value = pomodoroState.value.copy(
+                    isRunning = false
+                )
+            }
+        }
+    }
+
+    private fun nextCycle()
+    {
+        when (pomodoroState.value.actualCycle) {
+            Cycles.FIRST -> {
+                _pomodoroState.value = pomodoroState.value.copy(
+                    actualCycle = Cycles.SHORT_BREAK,
+                    actualTimeRunning = pomodoroState.value.shortBreak.toLong()
+                )
+                _pomodoroTimerState.value = pomodoroTimerState.value.copy(
+                    progress = 1f
+                )
+                createNewTask(pomodoroState.value)
+            }
+            Cycles.SHORT_BREAK -> {
+                _pomodoroState.value = pomodoroState.value.copy(
+                    actualCycle = Cycles.MEDIUM,
+                    actualTimeRunning = pomodoroState.value.jobTime.toLong()
+                )
+                createNewTask(pomodoroState.value)
+            }
+            Cycles.MEDIUM -> {
+                _pomodoroState.value = pomodoroState.value.copy(
+                    actualCycle = Cycles.LONG_BREAK,
+                    actualTimeRunning = pomodoroState.value.longBreak.toLong()
+                )
+                createNewTask(pomodoroState.value)
+            }
+            Cycles.LONG_BREAK -> {
+                _pomodoroState.value = pomodoroState.value.copy(
+                    actualCycle = Cycles.LAST
+                )
+                createNewTask(pomodoroState.value)
+            }
+            Cycles.LAST -> {
+                return
+            }
+        }
     }
 
     private fun restartProgress() {
@@ -99,9 +138,9 @@ class TimerViewModel @Inject constructor(
         )
     }
 
-    /* fun finalizePomorodo()
+     private fun finalizePomorodo()
      {
-         repository.savePomorodo()
-     }*/
+        // repository.savePomorodo()
+     }
 
 }
