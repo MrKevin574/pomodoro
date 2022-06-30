@@ -1,6 +1,7 @@
 package com.mrkevin574.pomodoro.presentation.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -25,6 +26,7 @@ import com.mrkevin574.pomodoro.presentation.screens.log.LogScreen
 import com.mrkevin574.pomodoro.presentation.screens.timer.TimerScreen
 import kotlinx.coroutines.launch
 import com.mrkevin574.pomodoro.R
+import com.mrkevin574.pomodoro.ui.theme.PrimaryColor
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -68,6 +70,7 @@ fun MainScreen() {
         modifier = Modifier
             .fillMaxSize()
             .padding(top = dimensionResource(id = R.dimen.tab_row_size))
+            .background(PrimaryColor)
     ){ page ->
         when(page)
         {
