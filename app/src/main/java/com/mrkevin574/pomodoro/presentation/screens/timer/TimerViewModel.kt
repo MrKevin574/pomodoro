@@ -4,13 +4,11 @@ import android.os.CountDownTimer
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.mrkevin574.pomodoro.domain.Pomodoro
 import com.mrkevin574.pomodoro.domain.PomodoroRepository
 import com.mrkevin574.pomodoro.presentation.Event
 import com.mrkevin574.pomodoro.util.Cycles
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,25 +25,35 @@ class TimerViewModel @Inject constructor(
     private val _timerTextState = mutableStateOf(TimerTextState())
     val timerTextState: State<TimerTextState> = _timerTextState
 
+    var isPaused = false
+
     private var timer: CountDownTimer? = null
 
 
-    fun createNewTask(pomodoro: Pomodoro) {
+    fun startTask(pomodoro: Pomodoro) {
         restartProgress()
-        _pomodoroState.value = pomodoroState.value.copy(
-            name = pomodoro.name,
-            jobTime = pomodoro.jobTime,
-            shortBreak = pomodoro.shortBreak,
-            longBreak = pomodoro.longBreak,
-            actualCycle = pomodoro.actualCycle,
-            isRunning = true,
-            actualTimeRunning = pomodoro.actualTimeRunning
-        )
+        if (!isPaused) {
+            _pomodoroState.value = pomodoroState.value.copy(
+                name = pomodoro.name,
+                jobTime = pomodoro.jobTime,
+                shortBreak = pomodoro.shortBreak,
+                longBreak = pomodoro.longBreak,
+                actualCycle = pomodoro.actualCycle,
+                isRunning = true,
+                actualTimeRunning = pomodoro.actualTimeRunning,
+                timeRunningInmutable = pomodoro.actualTimeRunning
+            )
+        } else {
+            isPaused = false
+        }
 
         timer = object : CountDownTimer(pomodoroState.value.actualTimeRunning, 1) {
             override fun onTick(millisUntilFinished: Long) {
+                _pomodoroState.value = pomodoroState.value.copy(
+                    actualTimeRunning = millisUntilFinished
+                )
                 _pomodoroTimerState.value = pomodoroTimerState.value.copy(
-                    progress = millisUntilFinished / pomodoroState.value.actualTimeRunning.toFloat()
+                    progress = millisUntilFinished / pomodoroState.value.timeRunningInmutable.toFloat()
                 )
                 _timerTextState.value = timerTextState.value.copy(
                     actualTime = "${(millisUntilFinished / 1000 / 60).toInt()}:${(millisUntilFinished / 1000 % 60).toInt()}"
@@ -73,21 +81,19 @@ class TimerViewModel @Inject constructor(
                 )
             }
             Event.Resume -> {
-                timer?.start()
-                _pomodoroState.value = pomodoroState.value.copy(
-                    isRunning = true
-                )
+                changePomodoroRunning(true)
+                startTask(pomodoroState.value)
+
             }
             Event.Stop -> {
                 timer?.cancel()
                 restartProgress()
-                //   finalizePomorodo()
+                finalizePomorodo()
             }
             Event.Pause -> {
+                isPaused = true
                 timer?.cancel()
-                _pomodoroState.value = pomodoroState.value.copy(
-                    isRunning = false
-                )
+                changePomodoroRunning(false)
             }
         }
     }
@@ -97,32 +103,37 @@ class TimerViewModel @Inject constructor(
             Cycles.FIRST -> {
                 _pomodoroState.value = pomodoroState.value.copy(
                     actualCycle = Cycles.SHORT_BREAK,
-                    actualTimeRunning = pomodoroState.value.shortBreak.toLong()
+                    actualTimeRunning = pomodoroState.value.shortBreak.toLong(),
+                    timeRunningInmutable = pomodoroState.value.shortBreak.toLong(),
                 )
                 _pomodoroTimerState.value = pomodoroTimerState.value.copy(
                     progress = 1f
                 )
-                createNewTask(pomodoroState.value)
+                startTask(pomodoroState.value)
             }
             Cycles.SHORT_BREAK -> {
                 _pomodoroState.value = pomodoroState.value.copy(
                     actualCycle = Cycles.MEDIUM,
-                    actualTimeRunning = pomodoroState.value.jobTime.toLong()
+                    actualTimeRunning = pomodoroState.value.jobTime,
+                    timeRunningInmutable = pomodoroState.value.jobTime,
                 )
-                createNewTask(pomodoroState.value)
+                startTask(pomodoroState.value)
             }
             Cycles.MEDIUM -> {
                 _pomodoroState.value = pomodoroState.value.copy(
                     actualCycle = Cycles.LONG_BREAK,
-                    actualTimeRunning = pomodoroState.value.longBreak.toLong()
+                    actualTimeRunning = pomodoroState.value.longBreak.toLong(),
+                    timeRunningInmutable = pomodoroState.value.longBreak.toLong()
                 )
-                createNewTask(pomodoroState.value)
+                startTask(pomodoroState.value)
             }
             Cycles.LONG_BREAK -> {
                 _pomodoroState.value = pomodoroState.value.copy(
-                    actualCycle = Cycles.LAST
+                    actualCycle = Cycles.LAST,
+                    actualTimeRunning = pomodoroState.value.jobTime,
+                    timeRunningInmutable = pomodoroState.value.jobTime
                 )
-                createNewTask(pomodoroState.value)
+                startTask(pomodoroState.value)
             }
             Cycles.LAST -> {
                 return
@@ -137,12 +148,27 @@ class TimerViewModel @Inject constructor(
         _timerTextState.value = timerTextState.value.copy(
             actualTime = "00:00"
         )
+        _pomodoroState.value = pomodoroState.value.copy(
+            name = "",
+            actualTimeRunning = 0,
+            timeRunningInmutable = 0,
+            jobTime = 0,
+            shortBreak = 0f,
+            longBreak = 0f,
+            actualCycle = Cycles.FIRST,
+            isRunning = false
+        )
+    }
+
+    private fun changePomodoroRunning(value: Boolean) {
+        _pomodoroState.value = pomodoroState.value.copy(
+            isRunning = value
+        )
     }
 
     private fun finalizePomorodo() {
         // repository.savePomorodo()
     }
-
 
 
 }

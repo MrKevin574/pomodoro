@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.rounded.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,16 +20,16 @@ import com.mrkevin574.pomodoro.presentation.Event
 @Composable
 fun ButtonsTimer(onClick : (Event) -> Unit, isPlay : Boolean) {
     Row(
-        modifier = Modifier.fillMaxSize()
-            .padding(start = 50.dp, end = 50.dp, bottom = 20.dp),
+        modifier = Modifier.fillMaxWidth()
+            .padding(start = 50.dp, end = 50.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.Bottom,
     ){
         OptionImage(imageVector = Icons.Rounded.Stop, stringResource(R.string.stop)) { onClick(Event.Stop) }
         if(!isPlay)
-            OptionImage(imageVector = Icons.Rounded.PlayArrow, stringResource(R.string.play)) { onClick(Event.Play) }
+            OptionImage(imageVector = Icons.Rounded.PlayArrow, stringResource(R.string.play)) { onClick(Event.Resume) }
         else
-            OptionImage(imageVector = Icons.Rounded.Replay, stringResource(R.string.resume)) { onClick(Event.Pause) }
+            OptionImage(imageVector = Icons.Filled.Pause, stringResource(R.string.resume)) { onClick(Event.Pause) }
         OptionImage(imageVector = Icons.Rounded.SkipNext, stringResource(R.string.next)) { onClick(Event.Next) }
     }
 }

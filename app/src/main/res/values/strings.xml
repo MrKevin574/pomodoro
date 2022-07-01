@@ -5,4 +5,6 @@
     <string name="next">next</string>
     <string name="resume">resume</string>
     <string name="add_task">Add task</string>
+    <string name="pomodoro">POMODORO</string>
+    <string name="take_a_break">BREAK</string>
 </resources>

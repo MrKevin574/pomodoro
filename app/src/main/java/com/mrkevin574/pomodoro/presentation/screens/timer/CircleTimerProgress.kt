@@ -11,13 +11,13 @@ import androidx.compose.ui.unit.dp
 import com.mrkevin574.pomodoro.R
 
 @Composable
-fun CircleTimerProgress(progress : Float) {
+fun CircleTimerProgress(progress : Float, color : Color) {
     CircularProgressIndicator(
         progress = progress,
         modifier = Modifier
             .height(400.dp)
             .width(400.dp),
-        color = Color.White,
-        strokeWidth = 15.dp
+        color = color,
+        strokeWidth = dimensionResource(id = R.dimen.timer_progress_stroke)
     )
 }

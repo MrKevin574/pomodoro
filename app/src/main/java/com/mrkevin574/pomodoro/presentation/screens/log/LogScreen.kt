@@ -11,7 +11,7 @@ import java.util.*
 @Composable
 fun LogScreen() {
 
-    val pomodoros = listOf<PomodoroFinalized>(
+    val pomodoros = listOf(
         PomodoroFinalized(
             name = "Programar",
             date = Date(),
