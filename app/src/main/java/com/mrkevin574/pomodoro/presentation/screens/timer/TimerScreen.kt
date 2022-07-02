@@ -13,6 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mrkevin574.pomodoro.R
+import com.mrkevin574.pomodoro.presentation.screens.timer.components.*
 import com.mrkevin574.pomodoro.ui.theme.BreakColor
 import com.mrkevin574.pomodoro.util.Cycles
 

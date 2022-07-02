@@ -1,4 +1,4 @@
-package com.mrkevin574.pomodoro.presentation.screens.timer
+package com.mrkevin574.pomodoro.presentation.screens.timer.components
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width

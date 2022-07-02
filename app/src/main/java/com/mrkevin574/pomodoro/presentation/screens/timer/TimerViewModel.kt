@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import com.mrkevin574.pomodoro.domain.Pomodoro
 import com.mrkevin574.pomodoro.domain.PomodoroRepository
 import com.mrkevin574.pomodoro.presentation.Event
+import com.mrkevin574.pomodoro.presentation.screens.timer.states.CircleTimerProgressState
+import com.mrkevin574.pomodoro.presentation.screens.timer.states.TimerTextState
 import com.mrkevin574.pomodoro.util.Cycles
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
