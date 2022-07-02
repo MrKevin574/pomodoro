@@ -31,8 +31,8 @@ class TimerViewModel @Inject constructor(
 
 
     fun startTask(pomodoro: Pomodoro) {
-        restartProgress()
         if (!isPaused) {
+            restartProgress()
             _pomodoroState.value = pomodoroState.value.copy(
                 name = pomodoro.name,
                 jobTime = pomodoro.jobTime,

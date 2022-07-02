@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -28,6 +29,12 @@ fun TimerScreen(
     val timerTextState = viewModel.timerTextState.value
     val pomodoroExists = pomorodoState.name.isNotEmpty()
 
+    val colorTimer = if(pomorodoState.actualCycle == Cycles.SHORT_BREAK ||
+        pomorodoState.actualCycle == Cycles.LONG_BREAK) BreakColor else Color.White
+
+    val alphaBreak = if(pomorodoState.actualCycle == Cycles.SHORT_BREAK ||
+        pomorodoState.actualCycle == Cycles.LONG_BREAK) 1f else 0f
+
        val pomodoro = Pomodoro(
            name = "Test",
            jobTime = 60000,
@@ -42,14 +49,10 @@ fun TimerScreen(
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
 
-        if(pomorodoState.actualCycle == Cycles.SHORT_BREAK || pomorodoState.actualCycle == Cycles.LONG_BREAK )
-        {
-            TextTakeABreak()
-        }
-
-        ContainerTimer(pomorodoTimer.progress, timerTextState.actualTime, pomorodoState.actualCycle)
+        TextTakeABreak(alphaBreak)
+        ContainerTimer(pomorodoTimer.progress, timerTextState.actualTime, colorTimer)
         if (pomodoroExists) {
-            ButtonsTimer(onClick = { viewModel.onEvent(it) }, isPlay = pomorodoState.isRunning)
+            ButtonsTimer(onClick = { viewModel.onEvent(it) }, isPlay = pomorodoState.isRunning, colorTimer)
         } else {
             ButtonAddTask {
 
@@ -64,27 +67,27 @@ fun TimerScreen(
 }
 
 @Composable
-fun ContainerTimer(progress: Float, timerText: String, cycle: Cycles) {
+fun ContainerTimer(progress: Float, timerText: String, colorTimer: Color) {
     Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 100.dp),
+            .fillMaxWidth(),
         contentAlignment = Alignment.Center,
     ) {
 
-        val colorTimer = if(cycle == Cycles.SHORT_BREAK || cycle == Cycles.LONG_BREAK) BreakColor else Color.White
+
         CircleTimerProgress(progress = progress, colorTimer)
         TextTimerProgress(time = timerText, colorTimer)
     }
 }
 
 @Composable
-fun TextTakeABreak()
+fun TextTakeABreak(alphaBreak : Float)
 {
     Text(
         text = stringResource(R.string.take_a_break),
         color = BreakColor,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth()
+            .alpha(alphaBreak),
         textAlign = TextAlign.Center,
         fontWeight = FontWeight.Bold,
         fontSize = 30.sp,

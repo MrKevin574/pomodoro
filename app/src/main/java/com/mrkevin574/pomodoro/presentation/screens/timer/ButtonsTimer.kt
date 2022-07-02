@@ -18,29 +18,29 @@ import com.mrkevin574.pomodoro.R
 import com.mrkevin574.pomodoro.presentation.Event
 
 @Composable
-fun ButtonsTimer(onClick : (Event) -> Unit, isPlay : Boolean) {
+fun ButtonsTimer(onClick : (Event) -> Unit, isPlay : Boolean, colorButtons : Color) {
     Row(
         modifier = Modifier.fillMaxWidth()
             .padding(start = 50.dp, end = 50.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.Bottom,
     ){
-        OptionImage(imageVector = Icons.Rounded.Stop, stringResource(R.string.stop)) { onClick(Event.Stop) }
+        OptionImage(imageVector = Icons.Rounded.Stop, stringResource(R.string.stop), colorButtons = colorButtons) { onClick(Event.Stop) }
         if(!isPlay)
-            OptionImage(imageVector = Icons.Rounded.PlayArrow, stringResource(R.string.play)) { onClick(Event.Resume) }
+            OptionImage(imageVector = Icons.Rounded.PlayArrow, stringResource(R.string.play),colorButtons = colorButtons) { onClick(Event.Resume) }
         else
-            OptionImage(imageVector = Icons.Filled.Pause, stringResource(R.string.resume)) { onClick(Event.Pause) }
-        OptionImage(imageVector = Icons.Rounded.SkipNext, stringResource(R.string.next)) { onClick(Event.Next) }
+            OptionImage(imageVector = Icons.Filled.Pause, stringResource(R.string.resume),colorButtons = colorButtons) { onClick(Event.Pause) }
+        OptionImage(imageVector = Icons.Rounded.SkipNext, stringResource(R.string.next),colorButtons = colorButtons) { onClick(Event.Next) }
     }
 }
 
 @Composable
-fun OptionImage(imageVector: ImageVector, contentDescription : String, onClick: () -> Unit)
+fun OptionImage(imageVector: ImageVector, contentDescription : String, colorButtons: Color, onClick: () -> Unit)
 {
     Image(
         imageVector = imageVector,
         contentDescription = contentDescription,
-        colorFilter = ColorFilter.tint(Color.White),
+        colorFilter = ColorFilter.tint(colorButtons),
         modifier = Modifier
             .height(40.dp)
             .width(40.dp)
