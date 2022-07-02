@@ -1,6 +1,7 @@
 package com.mrkevin574.pomodoro.presentation.screens.timer
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -23,7 +24,6 @@ fun ButtonAddTask(onClick: () -> Unit) {
             .padding(top = 50.dp)
             .width(55.dp)
             .height(55.dp)
+            .clickable { onClick() }
     )
-
-
 }

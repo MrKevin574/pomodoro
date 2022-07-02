@@ -25,7 +25,9 @@ class TimerViewModel @Inject constructor(
     private val _timerTextState = mutableStateOf(TimerTextState())
     val timerTextState: State<TimerTextState> = _timerTextState
 
-    var isPaused = false
+    val createTask = mutableStateOf(false)
+
+    private var isPaused = false
 
     private var timer: CountDownTimer? = null
 
@@ -96,6 +98,11 @@ class TimerViewModel @Inject constructor(
                 changePomodoroRunning(false)
             }
         }
+    }
+
+    fun createTask()
+    {
+        createTask.value = true
     }
 
     private fun nextCycle() {
