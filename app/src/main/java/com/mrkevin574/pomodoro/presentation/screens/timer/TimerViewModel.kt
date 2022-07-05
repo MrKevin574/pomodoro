@@ -4,6 +4,7 @@ import android.os.CountDownTimer
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.mrkevin574.pomodoro.domain.Pomodoro
 import com.mrkevin574.pomodoro.domain.PomodoroRepository
 import com.mrkevin574.pomodoro.presentation.Event
@@ -12,6 +13,7 @@ import com.mrkevin574.pomodoro.presentation.screens.timer.states.CircleTimerProg
 import com.mrkevin574.pomodoro.presentation.screens.timer.states.TimerTextState
 import com.mrkevin574.pomodoro.util.Cycles
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -113,8 +115,8 @@ class TimerViewModel @Inject constructor(
             }
             Event.Stop -> {
                 timer?.cancel()
+                savePomodoro()
                 restartProgress()
-                finalizePomorodo()
                 alertDialogOptionState.value = OptionTask.NAME
             }
             Event.Pause -> {
@@ -169,6 +171,8 @@ class TimerViewModel @Inject constructor(
             }
             Cycles.LAST -> {
                 alertDialogOptionState.value = OptionTask.NAME
+                savePomodoro()
+                restartProgress()
                 return
             }
         }
@@ -199,8 +203,10 @@ class TimerViewModel @Inject constructor(
         )
     }
 
-    private fun finalizePomorodo() {
-        // repository.savePomorodo()
+    private fun savePomodoro() {
+        viewModelScope.launch {
+            repository.savePomodoro(pomodoroState.value)
+        }
     }
 
 

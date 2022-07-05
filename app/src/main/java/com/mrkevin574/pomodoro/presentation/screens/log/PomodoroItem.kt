@@ -9,10 +9,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mrkevin574.pomodoro.domain.PomodoroFinalized
+import com.mrkevin574.pomodoro.data.local.PomodoroEntity
 
 @Composable
-fun PomodoroItem(pomodoro: PomodoroFinalized) {
+fun PomodoroItem(pomodoro: PomodoroEntity) {
     Column(
         modifier = Modifier.padding(top = 50.dp, start = 50.dp, end = 50.dp)
     ) {

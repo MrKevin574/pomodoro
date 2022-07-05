@@ -5,44 +5,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.mrkevin574.pomodoro.domain.PomodoroFinalized
+import androidx.hilt.navigation.compose.hiltViewModel
 import java.util.*
 
 @Composable
-fun LogScreen() {
+fun LogScreen(
+    viewModel: LogViewModel = hiltViewModel()
+) {
 
-    val pomodoros = listOf(
-        PomodoroFinalized(
-            name = "Programar",
-            date = Date(),
-            cycles = 3,
-            focusedTime = 30f
-        ),
-        PomodoroFinalized(
-            name = "chingar",
-            date = Date(),
-            cycles = 3,
-            focusedTime = 30f
-        ),
-        PomodoroFinalized(
-            name = "comer",
-            date = Date(),
-            cycles = 3,
-            focusedTime = 30f
-        ),
-        PomodoroFinalized(
-            name = "Programar",
-            date = Date(),
-            cycles = 3,
-            focusedTime = 30f
-        ),
-        PomodoroFinalized(
-            name = "Programar",
-            date = Date(),
-            cycles = 3,
-            focusedTime = 30f
-        )
-    )
+    val pomodoros = viewModel.pomodoros.value
 
     LazyColumn(modifier = Modifier.fillMaxSize())
     {
