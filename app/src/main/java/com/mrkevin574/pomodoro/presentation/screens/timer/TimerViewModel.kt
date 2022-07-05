@@ -89,7 +89,7 @@ class TimerViewModel @Inject constructor(
                 alertDialogOptionState.value = OptionTask.LONG_BREAK
             }
             OptionTask.LONG_BREAK -> {
-
+                alertDialogOptionState.value = OptionTask.NAME
             }
         }
     }
@@ -115,6 +115,7 @@ class TimerViewModel @Inject constructor(
                 timer?.cancel()
                 restartProgress()
                 finalizePomorodo()
+                alertDialogOptionState.value = OptionTask.NAME
             }
             Event.Pause -> {
                 isPaused = true
@@ -167,6 +168,7 @@ class TimerViewModel @Inject constructor(
                 startTask(pomodoroState.value)
             }
             Cycles.LAST -> {
+                alertDialogOptionState.value = OptionTask.NAME
                 return
             }
         }

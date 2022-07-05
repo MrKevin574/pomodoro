@@ -16,13 +16,13 @@ fun SelectJobTime(onSelectJobTime : (Long) -> Unit) {
         when(it)
         {
             job_times[0] -> {
-                onSelectJobTime(20000)
+                onSelectJobTime(20 * 60 * 1000)
             }
             job_times[1] -> {
-                onSelectJobTime(25000)
+                onSelectJobTime(25 * 60 * 1000)
             }
             job_times[2] -> {
-                onSelectJobTime(30000)
+                onSelectJobTime(30 * 60 * 1000)
             }
         }
     } )

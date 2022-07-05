@@ -2,7 +2,7 @@
     <string name="app_name">Pomodoro</string>
     <string name="stop">stop</string>
     <string name="play">play</string>
-    <string name="next">next</string>
+    <string name="next">Next</string>
     <string name="resume">resume</string>
     <string name="add_task">Add task</string>
     <string name="pomodoro">POMODORO</string>

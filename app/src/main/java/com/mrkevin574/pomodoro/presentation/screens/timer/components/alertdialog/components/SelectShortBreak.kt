@@ -14,9 +14,9 @@ fun SelectShortBreak(onSelectShortBreak : (Float) -> Unit) {
     RadioGroupButtons(label = stringResource(R.string.select_short_break), listButtons = short_breaks, onOptionSelect = {
         when(it)
         {
-            short_breaks[0] -> { onSelectShortBreak(5000f)}
-            short_breaks[1] -> { onSelectShortBreak(10000f)}
-            short_breaks[2] -> { onSelectShortBreak(15000f)}
+            short_breaks[0] -> { onSelectShortBreak(5 * 60 * 1000f)}
+            short_breaks[1] -> { onSelectShortBreak(10 * 60 * 1000f)}
+            short_breaks[2] -> { onSelectShortBreak(15 * 60 * 1000f)}
         }
     })
 }

@@ -15,13 +15,13 @@ fun SelectLongBreak(onOptionSelect : (Float) -> Unit) {
         when(it)
         {
             long_breaks[0] -> {
-                onOptionSelect(20000f)
+                onOptionSelect(20 * 60 * 1000f)
             }
             long_breaks[1] -> {
-                onOptionSelect(25000f)
+                onOptionSelect(25 * 60 * 1000f)
             }
             long_breaks[2] -> {
-                onOptionSelect(30000f)
+                onOptionSelect(30 * 60 * 1000f)
             }
         }
     } )
