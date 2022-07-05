@@ -6,21 +6,21 @@ import com.mrkevin574.pomodoro.R
 
 @Composable
 fun SelectLongBreak(onOptionSelect : (Float) -> Unit) {
-    val long_breaks = listOf(
+    val longBreaks = listOf(
         stringResource(id = R.string.minutes_2o),
         stringResource(id = R.string.minutes_25),
         stringResource(id = R.string.minutes_30)
     )
-    RadioGroupButtons(label = stringResource(R.string.select_long_break), listButtons = long_breaks, onOptionSelect = {
+    RadioGroupButtons(label = stringResource(R.string.select_long_break), listButtons = longBreaks, onOptionSelect = {
         when(it)
         {
-            long_breaks[0] -> {
+            longBreaks[0] -> {
                 onOptionSelect(20 * 60 * 1000f)
             }
-            long_breaks[1] -> {
+            longBreaks[1] -> {
                 onOptionSelect(25 * 60 * 1000f)
             }
-            long_breaks[2] -> {
+            longBreaks[2] -> {
                 onOptionSelect(30 * 60 * 1000f)
             }
         }
