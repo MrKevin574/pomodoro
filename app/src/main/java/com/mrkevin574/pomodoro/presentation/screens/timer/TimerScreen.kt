@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mrkevin574.pomodoro.R
 import com.mrkevin574.pomodoro.presentation.screens.timer.components.*
+import com.mrkevin574.pomodoro.presentation.screens.timer.components.alertdialog.AlertDialogNewTask
 import com.mrkevin574.pomodoro.ui.theme.BreakColor
 import com.mrkevin574.pomodoro.util.Cycles
 
@@ -26,6 +27,7 @@ fun TimerScreen(
     val timerTextState = viewModel.timerTextState.value
     val pomodoroExists = pomorodoState.name.isNotEmpty()
     val stateCreateTask = viewModel.createTask.value
+    val actualDialog = viewModel.alertDialogOptionState.value
 
     val colorTimer = getColorTimer(pomorodoState.actualCycle)
     val alphaBreak = getAlphaBreak(pomorodoState.actualCycle)
@@ -46,13 +48,18 @@ fun TimerScreen(
             )
         } else {
             ButtonAddTask {
-                viewModel.createTask()
+                viewModel.changeCreateTaskState()
             }
         }
     }
 
     if (stateCreateTask) {
-        AlertDialogNewTask(startTask = { viewModel.startTask(it) })
+        AlertDialogNewTask(
+            startTask = { viewModel.startTask(it) },
+            optionTask = actualDialog,
+            onOptionSelected = {viewModel.onOptionSelected(it)},
+            changeCreateTask = {viewModel.changeCreateTaskState()}
+        )
     }
 }
 

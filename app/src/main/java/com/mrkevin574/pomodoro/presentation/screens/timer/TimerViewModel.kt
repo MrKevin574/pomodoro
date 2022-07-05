@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.mrkevin574.pomodoro.domain.Pomodoro
 import com.mrkevin574.pomodoro.domain.PomodoroRepository
 import com.mrkevin574.pomodoro.presentation.Event
+import com.mrkevin574.pomodoro.presentation.screens.timer.components.alertdialog.OptionTask
 import com.mrkevin574.pomodoro.presentation.screens.timer.states.CircleTimerProgressState
 import com.mrkevin574.pomodoro.presentation.screens.timer.states.TimerTextState
 import com.mrkevin574.pomodoro.util.Cycles
@@ -26,6 +27,8 @@ class TimerViewModel @Inject constructor(
 
     private val _timerTextState = mutableStateOf(TimerTextState())
     val timerTextState: State<TimerTextState> = _timerTextState
+
+    val alertDialogOptionState = mutableStateOf(OptionTask.NAME)
 
     val createTask = mutableStateOf(false)
 
@@ -72,6 +75,25 @@ class TimerViewModel @Inject constructor(
         timer!!.start()
     }
 
+    fun onOptionSelected(optionTask: OptionTask)
+    {
+        when(optionTask)
+        {
+            OptionTask.NAME -> {
+                alertDialogOptionState.value = OptionTask.JOB_TIME
+            }
+            OptionTask.JOB_TIME -> {
+                alertDialogOptionState.value = OptionTask.SHORT_BREAK
+            }
+            OptionTask.SHORT_BREAK -> {
+                alertDialogOptionState.value = OptionTask.LONG_BREAK
+            }
+            OptionTask.LONG_BREAK -> {
+
+            }
+        }
+    }
+
     fun onEvent(event: Event) {
         when (event) {
             Event.Next -> {
@@ -102,9 +124,9 @@ class TimerViewModel @Inject constructor(
         }
     }
 
-    fun createTask()
+    fun changeCreateTaskState()
     {
-        createTask.value = true
+        createTask.value = !createTask.value
     }
 
     private fun nextCycle() {

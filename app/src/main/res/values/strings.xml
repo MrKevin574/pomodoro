@@ -7,4 +7,14 @@
     <string name="add_task">Add task</string>
     <string name="pomodoro">POMODORO</string>
     <string name="take_a_break">BREAK</string>
+    <string name="insert_name">Insert name</string>
+    <string name="minutes_2o">20 minutes</string>
+    <string name="minutes_25">25 minutes</string>
+    <string name="minutes_30">30 minutes</string>
+    <string name="minutes_5">5 minutes</string>
+    <string name="minutes_10">10 minutes</string>
+    <string name="minutes_15">15 minutes</string>
+    <string name="select_task_time">Select a Task time</string>
+    <string name="select_long_break">Select a long break</string>
+    <string name="select_short_break">Select short break</string>
 </resources>
