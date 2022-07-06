@@ -14,12 +14,13 @@ import com.mrkevin574.pomodoro.presentation.MainActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
+const val CHANNEL_ID = "123"
+
 class NotificationProvider @Inject constructor(
-    @ApplicationContext private val context : Context
+    @ApplicationContext private val context: Context
 ) {
 
-    private val CHANNEL_ID = "123"
-    var notificationId = 0
+    private var notificationId = 0
 
     init {
         createNotificationChannel()
@@ -30,11 +31,10 @@ class NotificationProvider @Inject constructor(
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
 
-    private val pendingIntent : PendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+    private val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
-    fun showNotification()
-    {
-        with(NotificationManagerCompat.from(context)){
+    fun showNotification() {
+        with(NotificationManagerCompat.from(context)) {
             notify(notificationId++, builder.build())
         }
     }

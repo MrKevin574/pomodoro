@@ -28,7 +28,6 @@ fun TimerScreen(
     val timerTextState = viewModel.timerTextState.value
     val pomodoroExists = pomorodoState.name.isNotEmpty()
     val stateCreateTask = viewModel.createTask.value
-    val actualDialog = viewModel.alertDialogOptionState.value
 
     val colorTimer = getColorTimer(pomorodoState.actualCycle)
     val alphaBreak = getAlphaBreak(pomorodoState.actualCycle)

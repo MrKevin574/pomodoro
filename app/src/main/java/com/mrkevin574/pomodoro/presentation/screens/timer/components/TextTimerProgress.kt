@@ -13,7 +13,7 @@ import com.mrkevin574.pomodoro.ui.theme.oswaldMedium
 @Composable
 fun TextTimerProgress(time : String, color: Color) {
     Text(
-        text = time.ifEmpty { stringResource(R.string.pomodoro) },
+        text = time.ifEmpty { stringResource(R.string.timer_start) },
         fontWeight = FontWeight.Bold,
         fontSize = 30.sp,
         textAlign = TextAlign.Center,
