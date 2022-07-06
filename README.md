@@ -1,8 +1,14 @@
+Reto que corresponde al mes de abril de la serie de deasfios que esta proponiendo Mouredev en su
+proyecto de retos de creación mensual de aplicaciones de la comunidad MoureDev en base a requisitos,
+llamdado App Monthly Challenge 2022. Requisitos para la app de marzo
+
 POMODORO: Crea un "Pomodoro" configurable que guarde todo tu historial de tareas.
 
-La técnica "pomodoro" es un método para mejorar la administración del tiempo dedicado a una actividad e incrementar tu productividad.
+La técnica "pomodoro" es un método para mejorar la administración del tiempo dedicado a una
+actividad e incrementar tu productividad.
 
-NOTA: Si se trata de una App Android o Web, agradecería crear un readme con un enlace de descarga o ejecución de la app. Gracias!
+NOTA: Si se trata de una App Android o Web, agradecería crear un readme con un enlace de descarga o
+ejecución de la app. Gracias!
 
 Requisitos:
 
