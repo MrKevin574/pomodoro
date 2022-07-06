@@ -6,18 +6,18 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import java.util.*
+import com.mrkevin574.pomodoro.presentation.screens.timer.TimerViewModel
 
 @Composable
 fun LogScreen(
-    viewModel: LogViewModel = hiltViewModel()
+    viewModel: TimerViewModel = hiltViewModel()
 ) {
 
-    val pomodoros = viewModel.pomodoros.value
+    val pomodoroList = viewModel.pomodoroList.value
 
     LazyColumn(modifier = Modifier.fillMaxSize())
     {
-        items(pomodoros)
+        items(pomodoroList)
         {
             PomodoroItem(it)
         }

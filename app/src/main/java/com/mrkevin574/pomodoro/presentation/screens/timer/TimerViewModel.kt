@@ -5,6 +5,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mrkevin574.pomodoro.data.local.PomodoroEntity
 import com.mrkevin574.pomodoro.domain.Pomodoro
 import com.mrkevin574.pomodoro.domain.PomodoroRepository
 import com.mrkevin574.pomodoro.presentation.Event
@@ -37,6 +38,14 @@ class TimerViewModel @Inject constructor(
     private var isPaused = false
 
     private var timer: CountDownTimer? = null
+
+    val pomodoroList = mutableStateOf(listOf<PomodoroEntity>())
+
+    init {
+        viewModelScope.launch {
+            pomodoroList.value = repository.getAllPomodoro()
+        }
+    }
 
 
     fun startTask(pomodoro: Pomodoro) {
