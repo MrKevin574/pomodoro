@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.material.TabRowDefaults
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.History
 import androidx.compose.material.icons.rounded.Timer
@@ -17,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.pagerTabIndicatorOffset
@@ -33,8 +36,8 @@ fun MainScreen() {
     val pagerState = rememberPagerState()
     val scope = rememberCoroutineScope()
     val pages = listOf(
-        Icons.Rounded.Timer,
-        Icons.Rounded.History
+        stringResource(R.string.timer),
+        stringResource(R.string.history)
     )
 
     TabRow(
@@ -46,13 +49,13 @@ fun MainScreen() {
         },
         modifier = Modifier.height(dimensionResource(id = R.dimen.tab_row_size))
     ) {
-        pages.forEachIndexed {index, icon ->
+        pages.forEachIndexed {index, title ->
             Tab(
                 text = {
-                    Image(
-                        imageVector = icon,
-                        contentDescription = "Icon",
-                        colorFilter = ColorFilter.tint(Color.White))
+                    Text(
+                        text = title,
+                        fontWeight = FontWeight.Bold
+                    )
                        },
                 selected = pagerState.currentPage == index,
                 onClick = {

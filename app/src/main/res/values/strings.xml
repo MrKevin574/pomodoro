@@ -18,4 +18,6 @@
     <string name="select_long_break">Select a long break</string>
     <string name="select_short_break">Select short break</string>
     <string name="not_task_saved">When you finish a task it will be saved here</string>
+    <string name="timer">Timer</string>
+    <string name="history">History</string>
 </resources>

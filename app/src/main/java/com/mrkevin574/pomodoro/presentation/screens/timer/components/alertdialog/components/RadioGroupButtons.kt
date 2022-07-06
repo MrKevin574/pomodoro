@@ -13,10 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import com.mrkevin574.pomodoro.ui.theme.BackgroundAlertDialog
-import com.mrkevin574.pomodoro.ui.theme.BreakColor
-import com.mrkevin574.pomodoro.ui.theme.PrimaryColor
-import com.mrkevin574.pomodoro.ui.theme.PrimaryTextColor
+import com.mrkevin574.pomodoro.ui.theme.*
 
 @Composable
 fun RadioGroupButtons(listButtons : List<String>, label: String, onOptionSelect: (String) -> Unit) {
@@ -31,7 +28,8 @@ fun RadioGroupButtons(listButtons : List<String>, label: String, onOptionSelect:
             color = PrimaryTextColor,
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
-            fontSize = 22.sp
+            fontSize = 22.sp,
+            fontFamily = oswaldMedium
         )
         listButtons.forEach {
             val isSelected = it == selectedButton.value

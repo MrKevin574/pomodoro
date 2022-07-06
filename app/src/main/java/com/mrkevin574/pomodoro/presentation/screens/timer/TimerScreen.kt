@@ -16,6 +16,7 @@ import com.mrkevin574.pomodoro.R
 import com.mrkevin574.pomodoro.presentation.screens.timer.components.*
 import com.mrkevin574.pomodoro.presentation.screens.timer.components.alertdialog.AlertDialogNewTask
 import com.mrkevin574.pomodoro.ui.theme.BreakColor
+import com.mrkevin574.pomodoro.ui.theme.oswaldMedium
 import com.mrkevin574.pomodoro.util.Cycles
 
 @Composable
@@ -81,6 +82,7 @@ fun TextTakeABreak(alphaBreak: Float) {
         textAlign = TextAlign.Center,
         fontWeight = FontWeight.Bold,
         fontSize = 30.sp,
+        fontFamily = oswaldMedium
     )
 }
 

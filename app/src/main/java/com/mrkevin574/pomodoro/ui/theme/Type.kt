@@ -20,6 +20,10 @@ val gantariFontFamily = FontFamily(
     Font(R.font.gantari_thin, FontWeight.Thin),
 )
 
+val oswaldMedium = FontFamily(
+    Font(R.font.oswald_medium, FontWeight.Normal)
+)
+
 val Typography = Typography(
     body1 = TextStyle(
         fontFamily = gantariFontFamily,

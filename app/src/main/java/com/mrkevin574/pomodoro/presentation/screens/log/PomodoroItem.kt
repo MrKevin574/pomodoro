@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mrkevin574.pomodoro.data.local.PomodoroEntity
+import com.mrkevin574.pomodoro.ui.theme.oswaldMedium
 
 @Composable
 fun PomodoroItem(pomodoro: PomodoroEntity, onClickDelete: () -> Unit) {
@@ -55,6 +56,7 @@ fun TextSecondaryTask(text: String) {
         text = text,
         fontSize = 12.sp,
         fontWeight = FontWeight.Normal,
-        color = Color.White
+        color = Color.White,
+        fontFamily = oswaldMedium
     )
 }

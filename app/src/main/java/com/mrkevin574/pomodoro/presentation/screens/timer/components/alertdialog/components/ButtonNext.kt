@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mrkevin574.pomodoro.R
 import com.mrkevin574.pomodoro.ui.theme.BreakColor
+import com.mrkevin574.pomodoro.ui.theme.oswaldMedium
 
 @Composable
 fun ButtonNext(onClick : () -> Unit)
@@ -29,7 +30,8 @@ fun ButtonNext(onClick : () -> Unit)
         Text(
             text = stringResource(id = R.string.next),
             fontSize = 16.sp,
-            modifier = Modifier.padding(10.dp)
+            modifier = Modifier.padding(10.dp),
+            fontFamily = oswaldMedium
         )
     }
 }

@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mrkevin574.pomodoro.R
 import com.mrkevin574.pomodoro.presentation.screens.timer.TimerViewModel
+import com.mrkevin574.pomodoro.ui.theme.oswaldMedium
 
 @Composable
 fun LogScreen(
@@ -63,7 +64,8 @@ fun TextNotTaskSaved() {
                 .fillMaxWidth()
                 .padding(start = 30.dp, end = 30.dp),
             fontSize = 24.sp,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            fontFamily = oswaldMedium
         )
     }
 

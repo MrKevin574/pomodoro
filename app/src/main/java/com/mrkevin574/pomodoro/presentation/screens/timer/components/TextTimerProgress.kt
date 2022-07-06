@@ -8,6 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.mrkevin574.pomodoro.R
+import com.mrkevin574.pomodoro.ui.theme.oswaldMedium
 
 @Composable
 fun TextTimerProgress(time : String, color: Color) {
@@ -16,7 +17,8 @@ fun TextTimerProgress(time : String, color: Color) {
         fontWeight = FontWeight.Bold,
         fontSize = 30.sp,
         textAlign = TextAlign.Center,
-        color = color
+        color = color,
+        fontFamily = oswaldMedium
     )
 
 }

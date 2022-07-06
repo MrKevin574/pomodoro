@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.mrkevin574.pomodoro.R
 import com.mrkevin574.pomodoro.ui.theme.*
@@ -39,9 +40,13 @@ fun OptionTaskName(onSelectName: (String) -> Unit) {
                 label = {
                     Text(
                         text = stringResource(R.string.insert_name),
-                        color = PrimaryTextColor
+                        color = PrimaryTextColor,
+                        fontFamily = oswaldMedium
                     )
-                }
+                },
+                textStyle = TextStyle(
+                    fontFamily = oswaldMedium
+                )
             )
             ButtonNext(onClick = { onSelectName(name.value) })
         }
