@@ -40,6 +40,8 @@ class TimerViewModel @Inject constructor(
 
     private var timer: CountDownTimer? = null
 
+    private var focusedTime : Long = 0
+
     val pomodoroList = mutableStateOf(listOf<PomodoroEntity>())
     var mutablePomodoroList = mutableListOf<PomodoroEntity>()
 
@@ -76,8 +78,12 @@ class TimerViewModel @Inject constructor(
                 _pomodoroTimerState.value = pomodoroTimerState.value.copy(
                     progress = millisUntilFinished / pomodoroState.value.timeRunningInmutable.toFloat()
                 )
+                val minutes = (millisUntilFinished / 1000 / 60).toInt()
+                val seconds = (millisUntilFinished / 1000 % 60).toInt()
+                val minutesString = if(minutes<10) "0$minutes" else "$minutes"
+                val secondsStrings = if(seconds<10) "0$seconds" else "$seconds"
                 _timerTextState.value = timerTextState.value.copy(
-                    actualTime = "${(millisUntilFinished / 1000 / 60).toInt()}:${(millisUntilFinished / 1000 % 60).toInt()}"
+                    actualTime = "$minutesString:${secondsStrings}"
                 )
             }
 
@@ -126,6 +132,7 @@ class TimerViewModel @Inject constructor(
 
             }
             Event.Stop -> {
+                focusedTime += pomodoroState.value.timeRunningInmutable - pomodoroState.value.actualTimeRunning
                 timer?.cancel()
                 savePomodoro()
                 restartProgress()
@@ -145,6 +152,7 @@ class TimerViewModel @Inject constructor(
     }
 
     private fun nextCycle() {
+        focusedTime += pomodoroState.value.timeRunningInmutable - pomodoroState.value.actualTimeRunning
         when (pomodoroState.value.actualCycle) {
             Cycles.FIRST -> {
                 _pomodoroState.value = pomodoroState.value.copy(
@@ -217,9 +225,9 @@ class TimerViewModel @Inject constructor(
 
     private fun savePomodoro() {
         viewModelScope.launch {
-            repository.savePomodoro(pomodoroState.value)
+            repository.savePomodoro(pomodoroState.value, focusedTime)
         }
-        mutablePomodoroList.add(pomodoroState.value.toEntity())
+        mutablePomodoroList.add(pomodoroState.value.toEntity(focusedTime))
         pomodoroList.value = mutablePomodoroList.toList()
     }
 

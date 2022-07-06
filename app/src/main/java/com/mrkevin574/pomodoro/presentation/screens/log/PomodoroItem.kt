@@ -35,7 +35,7 @@ fun PomodoroItem(pomodoro: PomodoroEntity, onClickDelete: () -> Unit) {
             )
             TextSecondaryTask("Date created: ${pomodoro.date}")
             TextSecondaryTask("Cycles completed: ${pomodoro.cycles}")
-            TextSecondaryTask("Total focused time: ${pomodoro.focusedTime}")
+            TextSecondaryTask("Total focused time: ${pomodoro.focusedTime} minutes")
         }
         Image(
             imageVector = Icons.Filled.Delete,

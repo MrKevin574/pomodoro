@@ -13,10 +13,10 @@ data class PomodoroEntity(
     @ColumnInfo(name = "name")val name : String = "",
     @ColumnInfo(name = "date")val date : String = "",
     @ColumnInfo(name = "cycles")val cycles : Int = 0,
-    @ColumnInfo(name = "focusedTime")val focusedTime : Float = 0f
+    @ColumnInfo(name = "focusedTime")val focusedTime : Long = 0
 )
 
-fun Pomodoro.toEntity()  = PomodoroEntity(
+fun Pomodoro.toEntity(focusedTime: Long)  = PomodoroEntity(
     name = this.name,
     date = Date().toString(),
     cycles = when(this.actualCycle)
@@ -27,5 +27,5 @@ fun Pomodoro.toEntity()  = PomodoroEntity(
         Cycles.LONG_BREAK -> 4
         Cycles.LAST -> 5
     },
-    focusedTime = 5f
+    focusedTime = focusedTime / 60 / 1000
 )

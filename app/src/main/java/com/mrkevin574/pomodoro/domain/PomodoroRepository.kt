@@ -8,9 +8,9 @@ import javax.inject.Inject
 
 class PomodoroRepository @Inject constructor(val dao : PomodoroDao)
 {
-    suspend fun savePomodoro(pomodoro: Pomodoro)
+    suspend fun savePomodoro(pomodoro: Pomodoro, focusedTime : Long)
     {
-        dao.savePomodoro(pomodoro.toEntity())
+        dao.savePomodoro(pomodoro.toEntity(focusedTime))
     }
 
     suspend fun getAllPomodoro() : List<PomodoroEntity>
