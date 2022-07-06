@@ -227,7 +227,7 @@ class TimerViewModel @Inject constructor(
         viewModelScope.launch {
             repository.savePomodoro(pomodoroState.value, focusedTime)
         }
-        mutablePomodoroList.add(pomodoroState.value.toEntity(focusedTime))
+        mutablePomodoroList.add(0,pomodoroState.value.toEntity(focusedTime))
         pomodoroList.value = mutablePomodoroList.toList()
     }
 
