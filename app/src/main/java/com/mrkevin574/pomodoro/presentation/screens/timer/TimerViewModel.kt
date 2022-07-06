@@ -1,26 +1,31 @@
 package com.mrkevin574.pomodoro.presentation.screens.timer
 
+import android.content.Context
 import android.os.CountDownTimer
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.core.app.NotificationCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mrkevin574.pomodoro.data.local.PomodoroEntity
 import com.mrkevin574.pomodoro.data.local.toEntity
 import com.mrkevin574.pomodoro.domain.Pomodoro
 import com.mrkevin574.pomodoro.domain.PomodoroRepository
+import com.mrkevin574.pomodoro.domain.notification.NotificationProvider
 import com.mrkevin574.pomodoro.presentation.Event
 import com.mrkevin574.pomodoro.presentation.screens.timer.components.alertdialog.OptionTask
 import com.mrkevin574.pomodoro.presentation.screens.timer.states.CircleTimerProgressState
 import com.mrkevin574.pomodoro.presentation.screens.timer.states.TimerTextState
 import com.mrkevin574.pomodoro.util.Cycles
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class TimerViewModel @Inject constructor(
-    private val repository: PomodoroRepository
+    private val repository: PomodoroRepository,
+    private val notificationProvider: NotificationProvider
 ) : ViewModel() {
 
     private val _pomodoroState = mutableStateOf(Pomodoro())
@@ -224,6 +229,7 @@ class TimerViewModel @Inject constructor(
     }
 
     private fun savePomodoro() {
+        notificationProvider.showNotification()
         viewModelScope.launch {
             repository.savePomodoro(pomodoroState.value, focusedTime)
         }

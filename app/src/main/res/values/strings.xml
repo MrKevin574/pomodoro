@@ -20,4 +20,7 @@
     <string name="not_task_saved">When you finish a task it will be saved here</string>
     <string name="timer">Timer</string>
     <string name="history">History</string>
+    <string name="pomodoro_app">Pomodoro App</string>
+    <string name="description_chanel">To get notifications when pomodoro finished</string>
+    <string name="notification_message">Your task is finished</string>
 </resources>
