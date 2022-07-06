@@ -1,3 +1,5 @@
+# POMODORO
+
 Reto que corresponde al mes de abril de la serie de deasfios que esta proponiendo Mouredev en su
 proyecto de retos de creación mensual de aplicaciones de la comunidad MoureDev en base a requisitos,
 llamdado App Monthly Challenge 2022. Requisitos para la app de marzo
@@ -36,3 +38,36 @@ Requisitos:
 
     - Esta es un tipo de aplicación con la que podemos practicar diseños de UI más elaborados. Intenta 
       hacerla bonita y con animaciones!
+      
+# Timer Pager
+      
+![mainscreen](https://user-images.githubusercontent.com/73857138/177652613-c2fd78b9-9925-460b-8ea4-df328bff9305.jpg)
+      
+      
+# Pager History
+![pager_log](https://user-images.githubusercontent.com/73857138/177652746-bb1f9887-8fb4-4e26-af94-6f4aa76be76d.jpg)
+
+
+### Tecnologies: 
+ 
+
+
+<p>
+<a href="https://kotlinlang.org/" target="_blank">Kotlin</a>
+ </p>
+ <p>
+<a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel" target="_blank">MVVM</a>
+ </p>
+ <p>
+<a href="https://developer.android.com/jetpack/compose?hl=es-419" target="_blank">Jetpack Compose</a>
+ </p>
+ <p >
+<a href="https://dagger.dev/hilt/" target="_blank">Dagger Hilt</a>
+ </p>
+ <p >
+<a href="https://developer.android.com/training/data-storage/room" target="_blank">Room</a>
+ </p>
+ <p>
+<a href="https://developer.android.com/kotlin/coroutines?hl=es-419" target="_blank">Coroutines</a>
+ </p>
+
