@@ -43,7 +43,7 @@ class TimerViewModel @Inject constructor(
     private var focusedTime : Long = 0
 
     val pomodoroList = mutableStateOf(listOf<PomodoroEntity>())
-    var mutablePomodoroList = mutableListOf<PomodoroEntity>()
+    private var mutablePomodoroList = mutableListOf<PomodoroEntity>()
 
     init {
         viewModelScope.launch {

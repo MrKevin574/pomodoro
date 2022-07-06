@@ -6,7 +6,7 @@ import com.mrkevin574.pomodoro.data.local.PomodoroEntity
 import com.mrkevin574.pomodoro.data.local.toEntity
 import javax.inject.Inject
 
-class PomodoroRepository @Inject constructor(val dao : PomodoroDao)
+class PomodoroRepository @Inject constructor(private val dao : PomodoroDao)
 {
     suspend fun savePomodoro(pomodoro: Pomodoro, focusedTime : Long)
     {

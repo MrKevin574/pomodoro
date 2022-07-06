@@ -28,7 +28,7 @@ fun LogScreen(
 
     val pomodoroList = viewModel.pomodoroList.value
 
-    if(!pomodoroList.isEmpty())
+    if(pomodoroList.isNotEmpty())
     {
         LazyColumn(modifier = Modifier.fillMaxSize())
         {

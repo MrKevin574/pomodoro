@@ -26,7 +26,7 @@ fun PomodoroItem(pomodoro: PomodoroEntity, onClickDelete: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Column() {
+        Column {
             Text(
                 text = pomodoro.name.replaceFirstChar { it.uppercase() },
                 fontSize = 16.sp,
