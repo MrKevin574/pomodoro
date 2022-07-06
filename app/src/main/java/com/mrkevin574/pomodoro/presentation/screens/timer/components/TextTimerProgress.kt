@@ -14,7 +14,7 @@ fun TextTimerProgress(time : String, color: Color) {
     Text(
         text = time.ifEmpty { stringResource(R.string.pomodoro) },
         fontWeight = FontWeight.Bold,
-        fontSize = 40.sp,
+        fontSize = 30.sp,
         textAlign = TextAlign.Center,
         color = color
     )
