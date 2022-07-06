@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.AlarmAdd
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,7 +18,7 @@ import com.mrkevin574.pomodoro.R
 fun ButtonAddTask(onClick: () -> Unit) {
 
     Image(
-        imageVector = Icons.Filled.Add,
+        imageVector = Icons.Filled.AlarmAdd,
         contentDescription = stringResource(R.string.add_task),
         colorFilter = ColorFilter.tint(Color.White),
         modifier = Modifier
