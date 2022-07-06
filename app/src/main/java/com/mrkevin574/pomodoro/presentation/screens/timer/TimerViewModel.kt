@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mrkevin574.pomodoro.data.local.PomodoroEntity
+import com.mrkevin574.pomodoro.data.local.toEntity
 import com.mrkevin574.pomodoro.domain.Pomodoro
 import com.mrkevin574.pomodoro.domain.PomodoroRepository
 import com.mrkevin574.pomodoro.presentation.Event
@@ -40,10 +41,12 @@ class TimerViewModel @Inject constructor(
     private var timer: CountDownTimer? = null
 
     val pomodoroList = mutableStateOf(listOf<PomodoroEntity>())
+    var mutablePomodoroList = mutableListOf<PomodoroEntity>()
 
     init {
         viewModelScope.launch {
             pomodoroList.value = repository.getAllPomodoro()
+            mutablePomodoroList = pomodoroList.value.toMutableList()
         }
     }
 
@@ -216,6 +219,17 @@ class TimerViewModel @Inject constructor(
         viewModelScope.launch {
             repository.savePomodoro(pomodoroState.value)
         }
+        mutablePomodoroList.add(pomodoroState.value.toEntity())
+        pomodoroList.value = mutablePomodoroList.toList()
+    }
+
+    fun deletePomodoro(pomodoro: PomodoroEntity)
+    {
+        viewModelScope.launch {
+            repository.deletePomodoro(pomodoro)
+        }
+        mutablePomodoroList.remove(pomodoro)
+        pomodoroList.value = mutablePomodoroList.toList()
     }
 
 

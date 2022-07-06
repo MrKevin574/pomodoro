@@ -19,7 +19,7 @@ fun LogScreen(
     {
         items(pomodoroList)
         {
-            PomodoroItem(it)
+            PomodoroItem(it, onClickDelete = {viewModel.deletePomodoro(it)})
         }
     }
 }
