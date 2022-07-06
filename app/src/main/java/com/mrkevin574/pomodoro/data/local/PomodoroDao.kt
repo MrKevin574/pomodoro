@@ -10,7 +10,7 @@ interface PomodoroDao {
     @Insert
     suspend fun savePomodoro(pomodoroEntity: PomodoroEntity)
 
-    @Query("SELECT * FROM PomodoroEntity ORDER BY date DESC")
+    @Query("SELECT * FROM PomodoroEntity ORDER BY id DESC")
     suspend fun getAllPomodoro() : List<PomodoroEntity>
 
     @Delete
